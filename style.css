@@ -2,54 +2,70 @@
     --bg: #000000;
     --card-bg: #121212;
     --accent: #0015ff;
-    --text: #ffffff;
+    --white: #ffffff;
     --gray: #94a3b8;
-    --border: rgba(255, 255, 255, 0.05);
+    --border: rgba(255, 255, 255, 0.08);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-body { background: var(--bg); color: var(--text); }
-.container { max-width: 450px; margin: 0 auto; padding: 0 16px; }
+/* Global Reset - Prevents the broken list look in 1179619.jpg */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+    list-style: none; /* Kills bullets globally */
+    text-decoration: none; 
+}
 
-/* Navbar Fix */
-.navbar { padding: 20px 0; position: sticky; top: 0; z-index: 100; background: var(--bg); }
-.nav-flex { display: flex; justify-content: space-between; align-items: center; }
-.logo { font-weight: 800; font-size: 1.2rem; }
-.menu-circle { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; }
+body { background: var(--bg); color: var(--white); -webkit-font-smoothing: antialiased; }
 
-/* Card Styling (Fixes the stacking in 1179619.jpg) */
+/* Container Fixes Alignment on Mobile */
+.container { 
+    max-width: 480px; 
+    margin: 0 auto; 
+    padding: 0 20px; 
+}
+
+/* Navbar Alignment */
+.navbar { padding: 25px 0; background: var(--bg); position: sticky; top: 0; z-index: 100; }
+.nav-flex { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+.logo { font-weight: 800; font-size: 1.3rem; letter-spacing: -0.5px; }
+.logo span { color: var(--accent); }
+.menu-circle { width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; }
+
+/* Card Styling - Replicates the reference images */
 .card {
     background: var(--card-bg);
-    border-radius: 28px;
-    padding: 24px;
+    border-radius: 30px;
+    padding: 25px;
     margin-bottom: 20px;
     border: 1px solid var(--border);
 }
 
-.avatar-box { width: 80px; height: 80px; border-radius: 50%; overflow: hidden; margin-bottom: 15px; background: #222; }
-.avatar-box img { width: 100%; height: 100%; object-fit: cover; }
+/* Hero Elements */
+.avatar-box { width: 85px; height: 85px; border-radius: 50%; overflow: hidden; margin-bottom: 15px; border: 2px solid var(--border); }
+.avatar-box img { width: 100%; height: 100%; object-position: center; }
+h1 { font-size: 1.9rem; line-height: 1.2; margin-bottom: 12px; }
+p { color: var(--gray); font-size: 1rem; line-height: 1.6; }
 
-h1 { font-size: 1.8rem; margin-bottom: 10px; }
-p { color: var(--gray); font-size: 0.95rem; line-height: 1.5; }
-
-.hero-btns { display: flex; gap: 10px; margin: 20px 0; }
-.btn { flex: 1; padding: 14px; border-radius: 50px; text-decoration: none; font-weight: 700; text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.9rem; }
+/* Button Grid Fix */
+.hero-btns { display: flex; gap: 10px; margin: 25px 0; }
+.btn { flex: 1; padding: 15px; border-radius: 50px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.9rem; }
 .btn-call { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--border); }
 .btn-mail { background: var(--accent); color: #fff; }
 
-/* List Fix (Removes bullets seen in 1179619.jpg) */
-.clean-list { list-style: none; margin-top: 15px; }
-.clean-list li { padding: 15px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; font-weight: 600; color: var(--gray); }
-.clean-list li i { color: #fff; width: 20px; }
+/* Service List Alignment (Fixed from 1179619.jpg) */
+.clean-list li {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-weight: 600;
+    color: var(--gray);
+}
+.clean-list li i { color: #fff; width: 20px; text-align: center; }
 
-/* Expertise Grid */
-.expertise-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
-.exp-box { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 15px; display: flex; align-items: center; gap: 10px; font-size: 0.85rem; font-weight: 600; }
-
-/* Section Headers */
-.section-head { display: flex; justify-content: space-between; align-items: center; margin: 10px 0 15px; }
-.section-head h2 { font-size: 1.2rem; }
-.section-head a { color: var(--accent); text-decoration: none; font-size: 0.85rem; font-weight: 700; }
-
-/* Footer */
-.footer { text-align: center; padding: 40px 0; opacity: 0.5; font-size: 0.8rem; }
+/* Footer Styling */
+.footer { text-align: center; padding: 50px 0; border-top: 1px solid var(--border); margin-top: 30px; }
+.footer p { font-size: 0.8rem; color: var(--gray); }
