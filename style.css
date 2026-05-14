@@ -1,69 +1,51 @@
+
 :root {
     --bg: #000000;
     --card: #121212;
     --accent: #0015ff;
-    --text: #ffffff;
-    --dim: #94a3b8;
+    --white: #ffffff;
+    --gray: #94a3b8;
     --border: rgba(255, 255, 255, 0.08);
 }
 
-/* 1. RESET: Stops the "Dull/Broken" list look in 1179619.jpg */
-* { 
-    margin: 0; padding: 0; box-sizing: border-box; 
-    list-style: none; text-decoration: none; 
-    font-family: 'Plus Jakarta Sans', sans-serif; 
-}
-
-body { background: var(--bg); color: var(--text); padding-bottom: 40px; }
+* { margin: 0; padding: 0; box-sizing: border-box; list-style: none; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif; }
+body { background: var(--bg); color: var(--white); overflow-x: hidden; }
 .container { max-width: 480px; margin: 0 auto; padding: 0 20px; }
 
-/* 2. NAVBAR: Fixed alignment */
-.navbar { padding: 25px 0; position: sticky; top: 0; z-index: 100; background: var(--bg); }
+/* Navbar Overlay (Fixes 1179621.jpg) */
+.navbar { padding: 25px 0; position: sticky; top: 0; z-index: 1000; background: var(--bg); }
 .nav-flex { display: flex; justify-content: space-between; align-items: center; }
-.logo { font-weight: 800; font-size: 1.3rem; }
-.logo span { color: var(--accent); }
-.menu-circle { width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; }
+.menu-circle { width: 45px; height: 45px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; }
 
-/* 3. CARDS: The "Premium" Look */
-.card {
-    background: var(--card);
-    border-radius: 30px;
-    padding: 25px;
-    margin-bottom: 20px;
-    border: 1px solid var(--border);
+.nav-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: #000; z-index: 2000; display: none; padding: 40px;
 }
-
-.avatar-box { width: 80px; height: 80px; border-radius: 50%; overflow: hidden; margin-bottom: 20px; }
-.avatar-box img { width: 100%; height: 100%; object-fit: cover; }
-
-h1 { font-size: 1.8rem; line-height: 1.2; margin-bottom: 15px; }
-p { color: var(--dim); line-height: 1.6; font-size: 1rem; }
-
-/* 4. BUTTONS: Standardized grid */
-.hero-btns { display: flex; gap: 10px; margin: 25px 0; }
-.btn { flex: 1; padding: 16px; border-radius: 50px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.9rem; border: none; cursor: pointer; }
-.btn-mail { background: var(--accent); color: #fff; }
-.btn-call { background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid var(--border); }
-.large-btn { width: 100%; margin-top: 20px; }
-
-/* 5. LISTS: Fixes 1179619.jpg alignment */
-.service-list li {
-    padding: 18px 0;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    color: var(--dim);
-    font-weight: 600;
+.nav-overlay.show { display: block; animation: fadeIn 0.3s ease-in; }
+.overlay-content { position: relative; }
+.close-btn { 
+    position: absolute; right: 0; top: 0; width: 40px; height: 40px; 
+    border: 1px solid var(--accent); color: var(--accent); text-align: center; line-height: 40px; border-radius: 8px; cursor: pointer;
 }
-.service-list li i { color: #fff; width: 20px; text-align: center; }
+.nav-links { margin-top: 80px; }
+.nav-links li { margin-bottom: 30px; }
+.nav-links a { font-size: 1.5rem; color: #fff; font-weight: 600; display: flex; align-items: center; gap: 15px; }
+.nav-links i { color: var(--gray); font-size: 1.2rem; }
 
-/* 6. SOCIAL ROW */
-.social-row { display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 1px solid var(--border); margin-top: 10px; }
-.social-icons { display: flex; gap: 10px; }
-.social-icons a { width: 35px; height: 35px; background: rgba(255,255,255,0.05); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--dim); border: 1px solid var(--border); }
+/* Card & Grid */
+.card { background: var(--card); border-radius: 30px; padding: 25px; margin-bottom: 20px; border: 1px solid var(--border); }
+.project-card { padding: 10px; }
+.project-img img { width: 100%; border-radius: 20px; }
+.project-info { padding: 15px; position: relative; }
+.arrow-btn { position: absolute; right: 15px; bottom: 20px; width: 35px; height: 35px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 
-/* 7. FOOTER */
-.footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--border); margin-top: 40px; }
-.brand-footer { font-weight: 800; color: var(--accent); margin-bottom: 10px; }
-.footer p { font-size: 0.8rem; color: var(--dim); }
+/* Expertise Grid */
+.expertise-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+.exp-box { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 15px; border: 1px solid var(--border); display: flex; align-items: center; gap: 10px; font-size: 0.85rem; font-weight: 600; }
+
+/* Work Experience */
+.work-item { display: flex; align-items: center; gap: 15px; margin-top: 15px; }
+.work-icon { width: 45px; height: 45px; background: var(--accent); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 800; }
+.work-date { margin-left: auto; color: var(--gray); font-size: 0.75rem; }
+
+@keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
