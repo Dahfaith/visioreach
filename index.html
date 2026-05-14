@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VisioReach Concepts</title>
-    <!-- Core Stylesheets -->
+    <!-- External Assets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <!-- The Link (Ensure your file is named style.css) -->
+    <link rel="stylesheet" href="style.css?v=1.1">
 </head>
 <body>
 
@@ -18,8 +19,8 @@
         </div>
     </nav>
 
-    <div class="container">
-        <!-- Hero Card (Fixes the overlapping in 1179619.jpg) -->
+    <main class="container">
+        <!-- Hero Section (Matches 1179573.jpg) -->
         <section class="card hero-section">
             <div class="avatar-box">
                 <img src="https://via.placeholder.com/100" alt="Profile">
@@ -27,10 +28,10 @@
             <h1>Hi, it's VisioReach Concepts 👋</h1>
             <p>I’m a Creative Web Developer based in Lagos. I help brands build with flexibility and speed.</p>
             <div class="hero-btns">
+                <a href="mailto:your@email.com" class="btn btn-mail"><i class="fas fa-paper-plane"></i> Send a mail</a>
                 <a href="#" class="btn btn-call"><i class="fas fa-phone"></i> Book a call</a>
-                <a href="#" class="btn btn-mail"><i class="fas fa-paper-plane"></i> Send a mail</a>
             </div>
-            <div class="social-footer">
+            <div class="social-row">
                 <span>Follow Me</span>
                 <div class="social-icons">
                     <a href="#"><i class="fab fa-github"></i></a>
@@ -40,22 +41,31 @@
             </div>
         </section>
 
-        <!-- Services (Fixes the bullet-point list issue) -->
-        <section class="card list-card">
+        <!-- Services Section (Matches 1179577.jpg) -->
+        <section class="card">
             <div class="section-head">
                 <h2>Services I Offer</h2>
+                <a href="#" class="see-all">See All</a>
             </div>
-            <ul class="clean-list">
+            <ul class="service-list">
                 <li><i class="fas fa-shield-alt"></i> Security & Maintenance</li>
                 <li><i class="fas fa-shopping-cart"></i> e-Commerce Solutions</li>
                 <li><i class="fas fa-rocket"></i> SEO & Optimization</li>
                 <li><i class="fas fa-code"></i> Custom Development</li>
             </ul>
         </section>
-    </div>
+
+        <!-- CTA Section (Matches 1179579.jpg) -->
+        <section class="card cta-card">
+            <h2>Let's 👋<br>Work Together</h2>
+            <p>Available For Hire 🚀 Crafting Digital Experiences</p>
+            <button class="btn btn-mail large-btn">Let's Talk</button>
+        </section>
+    </main>
 
     <footer class="footer">
-        <p>&copy; 2026 VisioReach Concepts | Designed By Dahfaith</p>
+        <div class="brand-footer">VisioReach</div>
+        <p>© 2026 VisioReach Concepts | Designed By Dahfaith</p>
     </footer>
 
 </body>
