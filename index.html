@@ -3,69 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VisioReach Concepts | Digital Creator</title>
+    <title>VisioReach Concepts</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <nav class="navbar">
         <div class="container nav-flex">
-            <div class="brand">
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="var(--accent)"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                <span>VisioReach</span>
-            </div>
-            <button class="menu-circle"><i class="fas fa-bars"></i></button>
+            <div class="logo">VisioReach<span>.</span></div>
+            <div class="menu-circle" id="menu-toggle"><i class="fas fa-bars"></i></div>
         </div>
     </nav>
 
-    <main class="container">
-        <!-- Hero Card (Reference: 1179573.jpg) -->
-        <section class="card hero-card">
-            <div class="profile-circle">
-                <img src="https://via.placeholder.com/150" alt="JK">
+    <div class="container">
+        <!-- Hero Card -->
+        <section class="card hero-section">
+            <div class="avatar-box">
+                <img src="https://via.placeholder.com/100" alt="Profile">
             </div>
             <h1>Hi, it's VisioReach Concepts 👋</h1>
-            <p class="bio">I’m a Creative Web Developer based in Lagos. I help brands build with flexibility, speed, and clear results in mind.</p>
-            <div class="hero-actions">
-                <a href="#" class="btn btn-secondary"><i class="fas fa-phone"></i> Book a call</a>
-                <a href="#" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send a mail</a>
+            <p>I’m a Creative Web Developer based in Lagos. I help brands build with flexibility, speed, and clear results in mind.</p>
+            <div class="hero-btns">
+                <a href="#" class="btn btn-call"><i class="fas fa-phone"></i> Book a call</a>
+                <a href="#" class="btn btn-mail"><i class="fas fa-paper-plane"></i> Send a mail</a>
             </div>
-            <div class="follow-row">
+            <div class="social-footer">
                 <span>Follow Me</span>
-                <div class="social-pills">
+                <div class="social-icons">
                     <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-x-twitter"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
                     <a href="#"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
         </section>
 
-        <!-- Projects Section (Reference: 1179575.jpg) -->
-        <section class="section-container">
-            <div class="section-header">
-                <h2>My Projects</h2>
-                <a href="#" class="see-all">See All</a>
-            </div>
-            <div class="project-card">
-                <img src="https://via.placeholder.com/600x400" alt="Project">
-                <div class="project-details">
-                    <h3>GadgetTrade NG</h3>
-                    <p>2025-2026</p>
-                </div>
-                <div class="arrow-circle"><i class="fas fa-arrow-up-right-from-square"></i></div>
-            </div>
-        </section>
+        <!-- Project Header -->
+        <div class="section-head">
+            <h2>My Projects</h2>
+            <a href="#">See All</a>
+        </div>
 
-        <!-- Services Section (Reference: 1179577.jpg) -->
-        <section class="card service-list-card">
-            <div class="section-header">
-                <h2>Services I Offer</h2>
-                <a href="#" class="see-all">See All</a>
+        <!-- Project Card -->
+        <div class="card project-card">
+            <div class="project-img-container">
+                <img src="https://via.placeholder.com/400x250" alt="Project">
             </div>
-            <ul class="service-items">
+            <div class="project-info">
+                <h3>GadgetTrade NG</h3>
+                <p>2025-2026</p>
+                <div class="arrow-btn"><i class="fas fa-external-link-alt"></i></div>
+            </div>
+        </div>
+        
+        <!-- Services Card -->
+        <section class="card list-card">
+            <div class="section-head">
+                <h2>Services I Offer</h2>
+                <a href="#">See All</a>
+            </div>
+            <ul class="clean-list">
                 <li><i class="fas fa-shield-alt"></i> Security & Maintenance</li>
                 <li><i class="fas fa-shopping-cart"></i> e-Commerce Solutions</li>
                 <li><i class="fas fa-rocket"></i> SEO & Optimization</li>
@@ -73,43 +71,28 @@
             </ul>
         </section>
 
-        <!-- Expertise Section (Reference: 1179577.jpg) -->
-        <section class="card expertise-card">
+        <!-- Expertise -->
+        <section class="card list-card">
             <h2>My Expertise Area</h2>
-            <div class="exp-list">
-                <div class="exp-item"><i class="fab fa-react" style="color:#61DBFB"></i> React / JS</div>
-                <div class="exp-item"><i class="fab fa-php" style="color:#777BB4"></i> PHP / MySQL</div>
-                <div class="exp-item"><i class="fab fa-wordpress" style="color:#21759b"></i> WordPress</div>
-                <div class="exp-item"><i class="fab fa-figma" style="color:#F24E1E"></i> Figma</div>
+            <div class="expertise-grid">
+                <div class="exp-box"><i class="fab fa-react"></i> React / JS</div>
+                <div class="exp-box"><i class="fab fa-php"></i> PHP / MySQL</div>
+                <div class="exp-box"><i class="fab fa-wordpress"></i> WordPress</div>
+                <div class="exp-box"><i class="fab fa-figma"></i> Figma</div>
             </div>
         </section>
 
-        <!-- Experience Section (Reference: 1179579.jpg) -->
-        <section class="card experience-card">
-            <h2>Work Experience</h2>
-            <div class="work-item">
-                <div class="work-logo">V</div>
-                <div class="work-info">
-                    <h4>VisioReach Concepts</h4>
-                    <p>Brand Lead</p>
-                </div>
-                <span class="work-date">2024 - Present</span>
-            </div>
-        </section>
-
-        <!-- CTA Card (Reference: 1179579.jpg) -->
+        <!-- CTA Card -->
         <section class="card cta-card">
             <h2>Let's 👋<br>Work Together</h2>
             <p>Available For Hire 🚀 Crafting Digital Experiences 🎨</p>
-            <button class="btn btn-primary large">Let's Talk</button>
+            <button class="btn btn-mail">Let's Talk</button>
         </section>
-    </main>
+    </div>
 
     <footer class="footer">
-        <div class="container">
-            <div class="brand-footer">VisioReach</div>
-            <p>© VisioReach 2026, Designed By Dahfaith</p>
-        </div>
+        <p>&copy; 2026 VisioReach Concepts</p>
+        <p>Designed By Dahfaith</p>
     </footer>
 
 </body>
