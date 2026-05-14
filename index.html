@@ -3,117 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VisioReach Concepts | Premium Digital Creator</title>
-    <!-- SEO & Fonts -->
-    <meta name="description" content="Professional web development and digital branding by VisioReach Concepts in Lagos, Nigeria.">
+    <title>VisioReach Concepts | Digital Creator</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Functional Navbar -->
     <nav class="navbar">
         <div class="container">
             <a href="#" class="logo">VisioReach<span>.</span></a>
-            <ul class="nav-menu" id="nav-menu">
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            </div>
+            <ul class="nav-menu">
                 <li><a href="#home" class="nav-link">Home</a></li>
                 <li><a href="#works" class="nav-link">Works</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
-            <div class="menu-toggle" id="mobile-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="hero-glow"></div>
         <div class="container">
             <div class="hero-content">
-                <h1>VisioReach Concepts</h1>
+                <h1 class="gradient-text">VisioReach Concepts</h1>
                 <p>Crafting <span id="type-effect"></span> for modern brands.</p>
                 <div class="hero-btns">
                     <a href="#works" class="btn btn-primary">View Projects</a>
-                    <a href="#contact" class="btn btn-outline">Let's Talk</a>
+                    <a href="#contact" class="btn btn-outline">Contact Me</a>
+                </div>
+                <div class="social-hero">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Works Section -->
+    <section class="about">
+        <div class="container">
+            <h2 class="section-label">About Me</h2>
+            <div class="about-content">
+                <p>I am a passionate digital creator based in Lagos, specializing in building high-end functional websites.</p>
+                <div class="stats-row">
+                    <div class="stat"><span>50+</span><small>Projects</small></div>
+                    <div class="stat"><span>4+</span><small>Years Exp.</small></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="skills">
+        <div class="container">
+            <h2 class="section-label">Technical Mastery</h2>
+            <div class="skills-grid">
+                <div class="skill-pill"><i class="fab fa-react"></i> React / JS</div>
+                <div class="skill-pill"><i class="fab fa-php"></i> PHP / MySQL</div>
+                <div class="skill-pill"><i class="fab fa-html5"></i> HTML / CSS</div>
+                <div class="skill-pill"><i class="fas fa-search"></i> SEO</div>
+            </div>
+        </div>
+    </section>
+
     <section class="projects" id="works">
         <div class="container">
             <h2 class="section-label">Featured Works</h2>
             <div class="projects-grid">
-                <!-- Project: GadgetTrade NG -->
                 <div class="card project-card">
                     <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1000" alt="GadgetTrade NG">
+                        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=1000" alt="GadgetTrade">
                     </div>
                     <div class="card-body">
                         <h3>GadgetTrade NG</h3>
                         <p>A premium e-commerce platform for tech enthusiasts.</p>
-                        <div class="tags"><span>React</span><span>Node.js</span></div>
-                        <div class="card-links">
-                            <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                            <a href="#"><i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project: GateJump Platform -->
-                <div class="card project-card">
-                    <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1000" alt="GateJump">
-                    </div>
-                    <div class="card-body">
-                        <h3>GateJump</h3>
-                        <p>Digital platform for creating and managing events.</p>
-                        <div class="tags"><span>PHP</span><span>MySQL</span><span>React</span></div>
-                        <div class="card-links">
-                            <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                            <a href="#"><i class="fab fa-github"></i></a>
+                        <div class="card-footer">
+                            <span class="tech">React Node</span>
+                            <div class="links">
+                                <a href="#"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="#"><i class="fab fa-github"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <h2 class="section-label">Get In Touch</h2>
-            <div class="card contact-card">
-                <form id="contact-form">
-                    <div class="input-group">
-                        <input type="text" placeholder="Your Name" required>
-                    </div>
-                    <div class="input-group">
-                        <input type="email" placeholder="Email Address" required>
-                    </div>
-                    <div class="input-group">
-                        <textarea placeholder="Your Message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn-submit">Send Message</button>
-                </form>
-                
-                <div class="contact-meta">
-                    <p><i class="fas fa-map-marker-alt"></i> Lagos, Nigeria</p>
-                    <a href="https://wa.me/234XXXXXXXXXX" class="wa-link"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <p>&copy; 2026 VisioReach Concepts. All Rights Reserved.</p>
-    </footer>
 
     <button id="backToTop" class="back-to-top"><i class="fas fa-arrow-up"></i></button>
 
