@@ -3,142 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VisioReach Concepts | Premium Web Development & Digital Branding</title>
-    <meta name="description" content="VisioReach Concepts - Crafting premium websites, UI/UX designs, and digital experiences in Lagos, Nigeria.">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="VisioReach Concepts Portfolio">
-    <meta property="og:description" content="Modern web solutions and digital branding.">
-    <meta property="og:type" content="website">
-
-    <!-- Fonts & Icons -->
+    <title>VisioReach Concepts | Premium Digital Creator</title>
+    <!-- SEO & Fonts -->
+    <meta name="description" content="Professional web development and digital branding by VisioReach Concepts in Lagos, Nigeria.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <!-- AOS Animation Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Header / Navbar -->
-    <header class="navbar">
+    <!-- Functional Navbar -->
+    <nav class="navbar">
         <div class="container">
             <a href="#" class="logo">VisioReach<span>.</span></a>
-            <nav class="nav-links">
-                <a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#skills">Skills</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
-            </nav>
-            <div class="menu-btn"><i class="fas fa-bars"></i></div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#works" class="nav-link">Works</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
         </div>
-    </header>
+    </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
+    <section class="hero" id="home">
         <div class="hero-glow"></div>
         <div class="container">
-            <div class="hero-content" data-aos="fade-up">
+            <div class="hero-content">
                 <h1>VisioReach Concepts</h1>
-                <p>Crafting <span class="typing-text"></span> for modern brands.</p>
+                <p>Crafting <span id="type-effect"></span> for modern brands.</p>
                 <div class="hero-btns">
-                    <a href="#projects" class="btn btn-primary">View Projects</a>
-                    <a href="#contact" class="btn btn-outline">Contact Me</a>
-                </div>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#works" class="btn btn-primary">View Projects</a>
+                    <a href="#contact" class="btn btn-outline">Let's Talk</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
+    <!-- Works Section -->
+    <section class="projects" id="works">
         <div class="container">
-            <div class="about-grid">
-                <div class="about-img" data-aos="fade-right">
-                    <div class="img-box">
-                        <img src="https://via.placeholder.com/400x500" alt="Developer Profile">
-                    </div>
-                </div>
-                <div class="about-text" data-aos="fade-left">
-                    <h2 class="section-title">About Me</h2>
-                    <p>I am a passionate digital creator based in Lagos, specializing in building high-end functional websites. With an eye for detail and a focus on performance, I transform ideas into seamless digital experiences.</p>
-                    <div class="stats-grid">
-                        <div class="stat-card"><h3>50+</h3><p>Projects Done</p></div>
-                        <div class="stat-card"><h3>4+</h3><p>Years Exp.</p></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title center">Technical Mastery</h2>
-            <div class="skills-grid">
-                <div class="skill-card" data-aos="zoom-in">
-                    <i class="fab fa-react" style="color: var(--cyan);"></i>
-                    <span>React / JavaScript</span>
-                </div>
-                <div class="skill-card" data-aos="zoom-in" data-aos-delay="100">
-                    <i class="fab fa-php" style="color: var(--purple);"></i>
-                    <span>PHP / MySQL</span>
-                </div>
-                <div class="skill-card" data-aos="zoom-in" data-aos-delay="200">
-                    <i class="fab fa-html5" style="color: var(--orange);"></i>
-                    <span>HTML5 / CSS3</span>
-                </div>
-                <div class="skill-card" data-aos="zoom-in" data-aos-delay="300">
-                    <i class="fas fa-search" style="color: #4ade80;"></i>
-                    <span>SEO Optimization</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title">Featured Works</h2>
+            <h2 class="section-label">Featured Works</h2>
             <div class="projects-grid">
-                <!-- Project Item -->
-                <div class="project-card" data-aos="fade-up">
-                    <img src="https://via.placeholder.com/400x250" alt="GadgetTrade NG">
-                    <div class="project-info">
+                <!-- Project: GadgetTrade NG -->
+                <div class="card project-card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1000" alt="GadgetTrade NG">
+                    </div>
+                    <div class="card-body">
                         <h3>GadgetTrade NG</h3>
                         <p>A premium e-commerce platform for tech enthusiasts.</p>
-                        <div class="tech-stack"><span>React</span> <span>Node</span></div>
-                        <div class="project-links">
+                        <div class="tags"><span>React</span><span>Node.js</span></div>
+                        <div class="card-links">
                             <a href="#"><i class="fas fa-external-link-alt"></i></a>
                             <a href="#"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                 </div>
-                <!-- Repeat for other projects -->
+
+                <!-- Project: GateJump Platform -->
+                <div class="card project-card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1000" alt="GateJump">
+                    </div>
+                    <div class="card-body">
+                        <h3>GateJump</h3>
+                        <p>Digital platform for creating and managing events.</p>
+                        <div class="tags"><span>PHP</span><span>MySQL</span><span>React</span></div>
+                        <div class="card-links">
+                            <a href="#"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <section class="contact" id="contact">
         <div class="container">
-            <div class="contact-box" data-aos="flip-up">
-                <h2>Get In Touch</h2>
+            <h2 class="section-label">Get In Touch</h2>
+            <div class="card contact-card">
                 <form id="contact-form">
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Email Address" required>
-                    <textarea placeholder="Your Message" rows="5" required></textarea>
-                    <button type="submit" class="btn btn-primary">Send Message</button>
+                    <div class="input-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" placeholder="Email Address" required>
+                    </div>
+                    <div class="input-group">
+                        <textarea placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Send Message</button>
                 </form>
-                <div class="contact-info">
+                
+                <div class="contact-meta">
                     <p><i class="fas fa-map-marker-alt"></i> Lagos, Nigeria</p>
-                    <a href="https://wa.me/+2347069659752" class="btn-whatsapp"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+                    <a href="https://wa.me/234XXXXXXXXXX" class="wa-link"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
                 </div>
             </div>
         </div>
@@ -148,10 +115,8 @@
         <p>&copy; 2026 VisioReach Concepts. All Rights Reserved.</p>
     </footer>
 
-    <button id="backToTop"><i class="fas fa-arrow-up"></i></button>
+    <button id="backToTop" class="back-to-top"><i class="fas fa-arrow-up"></i></button>
 
-    <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script src="script.js"></script>
 </body>
