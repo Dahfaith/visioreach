@@ -4,23 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VisioReach Concepts</title>
-    <!-- External Assets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
-    <!-- The Link (Ensure your file is named style.css) -->
-    <link rel="stylesheet" href="style.css?v=1.1">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- Professional Navbar (Fixes 1179621.jpg) -->
     <nav class="navbar">
         <div class="container nav-flex">
             <div class="logo">VisioReach<span>.</span></div>
-            <div class="menu-circle"><i class="fas fa-bars"></i></div>
+            <div class="menu-circle" id="menu-open"><i class="fas fa-bars"></i></div>
+        </div>
+        <div class="nav-overlay" id="nav-overlay">
+            <div class="overlay-content">
+                <div class="close-btn" id="menu-close">X</div>
+                <ul class="nav-links">
+                    <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
+                    <li><a href="#services"><i class="fas fa-server"></i> Services</a></li>
+                    <li><a href="#works"><i class="fas fa-layer-group"></i> Works</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
-    <main class="container">
-        <!-- Hero Section (Matches 1179573.jpg) -->
+    <div class="container" id="home">
+        <!-- Hero Card -->
         <section class="card hero-section">
             <div class="avatar-box">
                 <img src="https://via.placeholder.com/100" alt="Profile">
@@ -28,45 +38,76 @@
             <h1>Hi, it's VisioReach Concepts 👋</h1>
             <p>I’m a Creative Web Developer based in Lagos. I help brands build with flexibility and speed.</p>
             <div class="hero-btns">
-                <a href="mailto:your@email.com" class="btn btn-mail"><i class="fas fa-paper-plane"></i> Send a mail</a>
+                <a href="#" class="btn btn-mail"><i class="fas fa-paper-plane"></i> Send a mail</a>
                 <a href="#" class="btn btn-call"><i class="fas fa-phone"></i> Book a call</a>
             </div>
-            <div class="social-row">
-                <span>Follow Me</span>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
+        </section>
+
+        <!-- Project List Section -->
+        <div class="section-head" id="works">
+            <h2>My Projects</h2>
+            <a href="#">See All</a>
+        </div>
+
+        <div class="projects-grid">
+            <!-- Project 1 -->
+            <div class="card project-card">
+                <div class="project-img"><img src="https://via.placeholder.com/400x200" alt="GadgetTrade"></div>
+                <div class="project-info">
+                    <h3>GadgetTrade NG</h3>
+                    <p>Marketplace System</p>
+                    <div class="arrow-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
                 </div>
             </div>
-        </section>
-
-        <!-- Services Section (Matches 1179577.jpg) -->
-        <section class="card">
-            <div class="section-head">
-                <h2>Services I Offer</h2>
-                <a href="#" class="see-all">See All</a>
+            <!-- Project 2 -->
+            <div class="card project-card">
+                <div class="project-img"><img src="https://via.placeholder.com/400x200" alt="Bolu Autos"></div>
+                <div class="project-info">
+                    <h3>Bolu Autos</h3>
+                    <p>Business Website</p>
+                    <div class="arrow-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                </div>
             </div>
-            <ul class="service-list">
-                <li><i class="fas fa-shield-alt"></i> Security & Maintenance</li>
-                <li><i class="fas fa-shopping-cart"></i> e-Commerce Solutions</li>
-                <li><i class="fas fa-rocket"></i> SEO & Optimization</li>
-                <li><i class="fas fa-code"></i> Custom Development</li>
-            </ul>
+            <!-- Project 3 -->
+            <div class="card project-card">
+                <div class="project-img"><img src="https://via.placeholder.com/400x200" alt="Ticket platform"></div>
+                <div class="project-info">
+                    <h3>Ticket platform concept</h3>
+                    <p>Event System</p>
+                    <div class="arrow-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expertise Area -->
+        <section class="card">
+            <h2>My Expertise Area</h2>
+            <div class="expertise-grid">
+                <div class="exp-box"><i class="fab fa-react"></i> React / JS</div>
+                <div class="exp-box"><i class="fab fa-php"></i> PHP / MySQL</div>
+                <div class="exp-box"><i class="fab fa-wordpress"></i> WordPress</div>
+                <div class="exp-box"><i class="fas fa-chart-line"></i> SEO</div>
+            </div>
         </section>
 
-        <!-- CTA Section (Matches 1179579.jpg) -->
-        <section class="card cta-card">
-            <h2>Let's 👋<br>Work Together</h2>
-            <p>Available For Hire 🚀 Crafting Digital Experiences</p>
-            <button class="btn btn-mail large-btn">Let's Talk</button>
+        <!-- Work Experience -->
+        <section class="card">
+            <h2>Work Experience</h2>
+            <div class="work-item">
+                <div class="work-icon">V</div>
+                <div class="work-details">
+                    <h4>VisioReach Concepts</h4>
+                    <p>Brand Lead</p>
+                </div>
+                <span class="work-date">2024-2025</span>
+            </div>
         </section>
-    </main>
+    </div>
 
     <footer class="footer">
-        <div class="brand-footer">VisioReach</div>
         <p>© 2026 VisioReach Concepts | Designed By Dahfaith</p>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>
