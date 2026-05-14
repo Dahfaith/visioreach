@@ -4,32 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>VisioReach Concepts | Premium Web Developer</title>
+    <title>VisioReach Concepts | Web Developer Portfolio</title>
 
-    <!-- SEO -->
-    <meta name="description" content="VisioReach Concepts - Premium web development, UI/UX design, and digital solutions based in Lagos, Nigeria.">
-    <meta name="theme-color" content="#0f172a">
+    <meta name="description" content="VisioReach Concepts - Web development, UI/UX design, SEO and digital solutions in Lagos, Nigeria.">
 
     <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
-    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <!-- NAVBAR -->
-<nav class="navbar">
+<header class="navbar">
     <div class="container nav-container">
 
         <a href="#home" class="logo">VisioReach<span>.</span></a>
 
         <div class="menu-toggle" id="mobile-menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
 
         <ul class="nav-links">
@@ -41,48 +38,39 @@
         </ul>
 
     </div>
-</nav>
+</header>
 
 <!-- HERO -->
-<section class="hero" id="home">
+<section id="home" class="hero">
     <div class="container">
-        <h1 class="hero-title">VisioReach Concepts</h1>
+        <h1>VisioReach Concepts</h1>
+        <p>Crafting <span id="type-effect"></span> for modern brands.</p>
 
-        <p class="hero-sub">
-            Crafting <span id="type-effect"></span> for modern brands.
-        </p>
-
-        <div class="hero-actions">
+        <div class="hero-btns">
             <a href="#works" class="btn primary">View Projects</a>
             <a href="#contact" class="btn secondary">Contact Me</a>
-        </div>
-
-        <div class="hero-socials">
-            <a href="#"><i class="fab fa-github"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
         </div>
     </div>
 </section>
 
 <!-- ABOUT -->
-<section class="about" id="about">
+<section id="about" class="section">
     <div class="container">
-        <h2 class="label">About Me</h2>
+        <h2 class="section-title">About Me</h2>
 
         <p class="desc">
-            I am a passionate digital creator based in Lagos, specializing in building modern,
-            responsive and high-performance websites with clean UI/UX design principles.
+            I am a passionate web developer based in Lagos, focused on building modern,
+            responsive and high-performance websites and digital solutions.
         </p>
 
-        <div class="stats-grid">
-            <div class="stat-item">
-                <span>50+</span>
+        <div class="stats">
+            <div>
+                <h3>50+</h3>
                 <p>Projects Completed</p>
             </div>
 
-            <div class="stat-item">
-                <span>4+</span>
+            <div>
+                <h3>4+</h3>
                 <p>Years Experience</p>
             </div>
         </div>
@@ -90,36 +78,69 @@
 </section>
 
 <!-- SKILLS -->
-<section class="skills" id="skills">
+<section id="skills" class="section dark">
     <div class="container">
-        <h2 class="label">Technical Skills</h2>
+        <h2 class="section-title">Technical Skills</h2>
 
         <div class="skills-grid">
-            <div class="pill"><i class="fab fa-html5"></i> HTML5</div>
-            <div class="pill"><i class="fab fa-css3-alt"></i> CSS3</div>
-            <div class="pill"><i class="fab fa-js"></i> JavaScript</div>
-            <div class="pill"><i class="fab fa-php"></i> PHP / MySQL</div>
-            <div class="pill"><i class="fas fa-mobile-alt"></i> Responsive Design</div>
-            <div class="pill"><i class="fas fa-search"></i> SEO Optimization</div>
+
+            <div class="skill-card">
+                <i class="fab fa-html5"></i>
+                <h3>HTML5</h3>
+                <p>Structure & semantics</p>
+            </div>
+
+            <div class="skill-card">
+                <i class="fab fa-css3-alt"></i>
+                <h3>CSS3</h3>
+                <p>Responsive UI design</p>
+            </div>
+
+            <div class="skill-card">
+                <i class="fab fa-js"></i>
+                <h3>JavaScript</h3>
+                <p>Interactive websites</p>
+            </div>
+
+            <div class="skill-card">
+                <i class="fab fa-php"></i>
+                <h3>PHP</h3>
+                <p>Backend development</p>
+            </div>
+
+            <div class="skill-card">
+                <i class="fas fa-database"></i>
+                <h3>MySQL</h3>
+                <p>Database systems</p>
+            </div>
+
+            <div class="skill-card">
+                <i class="fab fa-wordpress"></i>
+                <h3>Elementor</h3>
+                <p>WordPress design</p>
+            </div>
+
+            <div class="skill-card">
+                <i class="fas fa-search"></i>
+                <h3>SEO</h3>
+                <p>Search optimization</p>
+            </div>
+
         </div>
     </div>
 </section>
 
 <!-- PROJECTS -->
-<section class="projects" id="works">
+<section id="works" class="section">
     <div class="container">
-        <h2 class="label">Featured Works</h2>
+        <h2 class="section-title">Projects</h2>
 
-        <div class="projects-grid">
+        <div class="projects">
 
-            <div class="project-card">
-                <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=600" alt="GadgetTrade NG">
-
-                <div class="project-info">
-                    <h3>GadgetTrade NG</h3>
-                    <p>E-commerce platform for buying and selling gadgets.</p>
-                    <span class="tech-tag">PHP • MySQL • Tailwind</span>
-                </div>
+            <div class="project">
+                <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c" alt="project">
+                <h3>GadgetTrade NG</h3>
+                <p>E-commerce gadget marketplace</p>
             </div>
 
         </div>
@@ -127,47 +148,27 @@
 </section>
 
 <!-- CONTACT -->
-<section class="contact" id="contact">
+<section id="contact" class="section dark">
     <div class="container">
-        <h2 class="label">Get In Touch</h2>
+        <h2 class="section-title">Contact</h2>
 
-        <div class="contact-card">
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" required></textarea>
+            <button class="btn primary">Send Message</button>
+        </form>
 
-            <form>
-                <input type="text" placeholder="Name" required>
-                <input type="email" placeholder="Email" required>
-                <textarea placeholder="Message" rows="5" required></textarea>
-
-                <button type="submit" class="btn primary full-width">
-                    Send Message
-                </button>
-            </form>
-
-            <div class="contact-meta">
-                <p><i class="fas fa-map-marker-alt"></i> Lagos, Nigeria</p>
-
-                <a href="https://wa.me/" target="_blank" class="wa-btn">
-                    <i class="fab fa-whatsapp"></i> Chat on WhatsApp
-                </a>
-            </div>
-
-        </div>
+        <p class="location">📍 Lagos, Nigeria</p>
     </div>
 </section>
 
-<!-- FOOTER -->
-<footer class="footer">
-    <div class="container footer-content">
-        <p>&copy; 2026 VisioReach Concepts. All Rights Reserved.</p>
-
-        <div class="footer-links">
-            <a href="#"><i class="fab fa-github"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-        </div>
+<footer>
+    <div class="container">
+        <p>© 2026 VisioReach Concepts. All rights reserved.</p>
     </div>
 </footer>
 
-<!-- SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 <script src="script.js"></script>
 
