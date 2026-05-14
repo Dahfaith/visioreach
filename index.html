@@ -3,97 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VisioReach Concepts | Digital Creator</title>
+
+    <title>VisioReach Concepts | Premium Web Developer</title>
+
+    <!-- SEO -->
+    <meta name="description" content="VisioReach Concepts - Premium web development, UI/UX design, and digital solutions based in Lagos, Nigeria.">
+    <meta name="theme-color" content="#0f172a">
+
+    <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <nav class="navbar">
-        <div class="container">
-            <a href="#" class="logo">VisioReach<span>.</span></a>
-            <div class="menu-toggle" id="mobile-menu">
-                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#works" class="nav-link">Works</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="container nav-container">
 
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="gradient-text">VisioReach Concepts</h1>
-                <p>Crafting <span id="type-effect"></span> for modern brands.</p>
-                <div class="hero-btns">
-                    <a href="#works" class="btn btn-primary">View Projects</a>
-                    <a href="#contact" class="btn btn-outline">Contact Me</a>
+        <a href="#home" class="logo">VisioReach<span>.</span></a>
+
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#works">Works</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+    <div class="container">
+        <h1 class="hero-title">VisioReach Concepts</h1>
+
+        <p class="hero-sub">
+            Crafting <span id="type-effect"></span> for modern brands.
+        </p>
+
+        <div class="hero-actions">
+            <a href="#works" class="btn primary">View Projects</a>
+            <a href="#contact" class="btn secondary">Contact Me</a>
+        </div>
+
+        <div class="hero-socials">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+    <div class="container">
+        <h2 class="label">About Me</h2>
+
+        <p class="desc">
+            I am a passionate digital creator based in Lagos, specializing in building modern,
+            responsive and high-performance websites with clean UI/UX design principles.
+        </p>
+
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span>50+</span>
+                <p>Projects Completed</p>
+            </div>
+
+            <div class="stat-item">
+                <span>4+</span>
+                <p>Years Experience</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills" id="skills">
+    <div class="container">
+        <h2 class="label">Technical Skills</h2>
+
+        <div class="skills-grid">
+            <div class="pill"><i class="fab fa-html5"></i> HTML5</div>
+            <div class="pill"><i class="fab fa-css3-alt"></i> CSS3</div>
+            <div class="pill"><i class="fab fa-js"></i> JavaScript</div>
+            <div class="pill"><i class="fab fa-php"></i> PHP / MySQL</div>
+            <div class="pill"><i class="fas fa-mobile-alt"></i> Responsive Design</div>
+            <div class="pill"><i class="fas fa-search"></i> SEO Optimization</div>
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="works">
+    <div class="container">
+        <h2 class="label">Featured Works</h2>
+
+        <div class="projects-grid">
+
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=600" alt="GadgetTrade NG">
+
+                <div class="project-info">
+                    <h3>GadgetTrade NG</h3>
+                    <p>E-commerce platform for buying and selling gadgets.</p>
+                    <span class="tech-tag">PHP • MySQL • Tailwind</span>
                 </div>
-                <div class="social-hero">
-                    <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                </div>
             </div>
-        </div>
-    </section>
 
-    <section class="about">
-        <div class="container">
-            <h2 class="section-label">About Me</h2>
-            <div class="about-content">
-                <p>I am a passionate digital creator based in Lagos, specializing in building high-end functional websites.</p>
-                <div class="stats-row">
-                    <div class="stat"><span>50+</span><small>Projects</small></div>
-                    <div class="stat"><span>4+</span><small>Years Exp.</small></div>
-                </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+    <div class="container">
+        <h2 class="label">Get In Touch</h2>
+
+        <div class="contact-card">
+
+            <form>
+                <input type="text" placeholder="Name" required>
+                <input type="email" placeholder="Email" required>
+                <textarea placeholder="Message" rows="5" required></textarea>
+
+                <button type="submit" class="btn primary full-width">
+                    Send Message
+                </button>
+            </form>
+
+            <div class="contact-meta">
+                <p><i class="fas fa-map-marker-alt"></i> Lagos, Nigeria</p>
+
+                <a href="https://wa.me/" target="_blank" class="wa-btn">
+                    <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                </a>
             </div>
+
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="skills">
-        <div class="container">
-            <h2 class="section-label">Technical Mastery</h2>
-            <div class="skills-grid">
-                <div class="skill-pill"><i class="fab fa-react"></i> React / JS</div>
-                <div class="skill-pill"><i class="fab fa-php"></i> PHP / MySQL</div>
-                <div class="skill-pill"><i class="fab fa-html5"></i> HTML / CSS</div>
-                <div class="skill-pill"><i class="fas fa-search"></i> SEO</div>
-            </div>
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container footer-content">
+        <p>&copy; 2026 VisioReach Concepts. All Rights Reserved.</p>
+
+        <div class="footer-links">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
         </div>
-    </section>
+    </div>
+</footer>
 
-    <section class="projects" id="works">
-        <div class="container">
-            <h2 class="section-label">Featured Works</h2>
-            <div class="projects-grid">
-                <div class="card project-card">
-                    <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=1000" alt="GadgetTrade">
-                    </div>
-                    <div class="card-body">
-                        <h3>GadgetTrade NG</h3>
-                        <p>A premium e-commerce platform for tech enthusiasts.</p>
-                        <div class="card-footer">
-                            <span class="tech">React Node</span>
-                            <div class="links">
-                                <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                                <a href="#"><i class="fab fa-github"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script src="script.js"></script>
 
-    <button id="backToTop" class="back-to-top"><i class="fas fa-arrow-up"></i></button>
-
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    <script src="script.js"></script>
 </body>
 </html>
