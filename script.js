@@ -1,73 +1,136 @@
 /* ===================================================
-   VisioReach Concepts – Portfolio JavaScript
-   Author: VisioReach Concepts
-   Version: 1.0
+   VisioReach Concepts – script.js v3.0
+   EmailJS + All interactivity
    =================================================== */
 
 'use strict';
 
 /* ─────────────────────────────────────────
-   1. NAVBAR – Scroll & Hamburger
+   EmailJS Configuration
+   ─────────────────────────────────────────
+   SETUP STEPS (free – 200 emails/month):
+   1. Go to https://emailjs.com → Create free account
+   2. Add a Gmail service → connect visioreach@gmail.com
+   3. Create an Email Template. Use these variables:
+        {{from_name}}  {{from_email}}  {{subject}}
+        {{service}}    {{message}}     {{to_email}}
+   4. Replace the three strings below with your real IDs
+   ───────────────────────────────────────── */
+const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // Account → API Keys
+const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // Email Services tab
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // Email Templates tab
+
+// Initialize EmailJS
+(function(){
+  if (typeof emailjs !== 'undefined') {
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  }
+})();
+
+
+/* ─────────────────────────────────────────
+   1. NAVBAR – scroll + hamburger
 ───────────────────────────────────────── */
 const navbar    = document.getElementById('navbar');
 const hamburger = document.getElementById('hamburger');
 const navMenu   = document.getElementById('navMenu');
 const navLinks  = document.querySelectorAll('.nav-link');
 
-// Scrolled state
+let lastScrollY = 0;
+let ticking     = false;
+
 window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 30);
-  updateActiveLink();
-  toggleBackToTop();
-  animateSkillBars();
-  animateCounters();
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      const sy = window.scrollY;
+
+      // Scrolled glass effect
+      navbar.classList.toggle('scrolled', sy > 20);
+
+      // Hide/show on scroll direction (only after passing nav height)
+      if (sy > 80) {
+        navbar.style.transform = sy > lastScrollY + 6
+          ? 'translateY(-100%)'
+          : 'translateY(0)';
+      } else {
+        navbar.style.transform = 'translateY(0)';
+      }
+      lastScrollY = sy;
+
+      updateActiveLink();
+      toggleBackToTop();
+      animateSkillBars();
+      animateCounters();
+      ticking = false;
+    });
+    ticking = true;
+  }
 }, { passive: true });
 
 // Hamburger toggle
 hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('active');
-  navMenu.classList.toggle('open');
-  document.body.style.overflow = navMenu.classList.contains('open') ? 'hidden' : '';
+  const open = hamburger.classList.toggle('active');
+  navMenu.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
 });
 
-// Close menu on link click
+// Close on nav link click
 navLinks.forEach(link => {
-  link.addEventListener('click', () => {
-    hamburger.classList.remove('active');
-    navMenu.classList.remove('open');
-    document.body.style.overflow = '';
-  });
+  link.addEventListener('click', closeMenu);
 });
 
-// Close menu on outside click
-document.addEventListener('click', (e) => {
-  if (!navbar.contains(e.target) && navMenu.classList.contains('open')) {
-    hamburger.classList.remove('active');
-    navMenu.classList.remove('open');
-    document.body.style.overflow = '';
-  }
+// Close on outside click
+document.addEventListener('click', e => {
+  if (!navbar.contains(e.target) && navMenu.classList.contains('open')) closeMenu();
 });
+
+// ESC to close
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && navMenu.classList.contains('open')) closeMenu();
+});
+
+function closeMenu() {
+  hamburger.classList.remove('active');
+  navMenu.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
 
 /* ─────────────────────────────────────────
-   2. ACTIVE NAV LINK – based on scroll position
+   2. ACTIVE NAV LINK
 ───────────────────────────────────────── */
 const sections = document.querySelectorAll('section[id]');
 
 function updateActiveLink() {
   const scrollY = window.scrollY + 100;
-  sections.forEach(section => {
-    const top    = section.offsetTop;
-    const height = section.offsetHeight;
-    const id     = section.getAttribute('id');
-    const link   = document.querySelector(`.nav-link[href="#${id}"]`);
-    if (link) {
-      link.classList.toggle('active', scrollY >= top && scrollY < top + height);
-    }
+  sections.forEach(sec => {
+    const top  = sec.offsetTop;
+    const h    = sec.offsetHeight;
+    const id   = sec.getAttribute('id');
+    const link = document.querySelector(`.nav-link[href="#${id}"]`);
+    if (link) link.classList.toggle('active', scrollY >= top && scrollY < top + h);
   });
 }
 
+
 /* ─────────────────────────────────────────
-   3. TYPING TEXT EFFECT
+   3. SMOOTH SCROLL for anchor links
+───────────────────────────────────────── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const href   = this.getAttribute('href');
+    const target = document.querySelector(href);
+    if (!target || href === '#') return;
+    e.preventDefault();
+    const navH   = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 68;
+    const top    = target.getBoundingClientRect().top + window.scrollY - navH;
+    window.scrollTo({ top, behavior: 'smooth' });
+  });
+});
+
+
+/* ─────────────────────────────────────────
+   4. TYPING TEXT EFFECT
 ───────────────────────────────────────── */
 const phrases = [
   'premium websites.',
@@ -76,453 +139,389 @@ const phrases = [
   'powerful e-commerce stores.',
   'beautiful UI/UX designs.',
   'high-converting dashboards.',
+  'WordPress & Elementor sites.',
+  'React-powered apps.',
 ];
 
-let phraseIndex = 0;
-let charIndex   = 0;
-let isDeleting  = false;
-let typingTimer;
+let pIdx = 0, cIdx = 0, isDeleting = false;
 
 function typeText() {
-  const target  = document.getElementById('typedText');
-  if (!target) return;
+  const el = document.getElementById('typedText');
+  if (!el) return;
+  const cur = phrases[pIdx];
+  el.textContent = isDeleting
+    ? cur.substring(0, cIdx - 1)
+    : cur.substring(0, cIdx + 1);
+  isDeleting ? cIdx-- : cIdx++;
 
-  const current = phrases[phraseIndex];
+  let delay = isDeleting ? 52 : 90;
+  if (!isDeleting && cIdx === cur.length)  { delay = 2000; isDeleting = true; }
+  else if (isDeleting && cIdx === 0)       { isDeleting = false; pIdx = (pIdx + 1) % phrases.length; delay = 380; }
 
-  if (isDeleting) {
-    target.textContent = current.substring(0, charIndex - 1);
-    charIndex--;
-  } else {
-    target.textContent = current.substring(0, charIndex + 1);
-    charIndex++;
-  }
-
-  let delay = isDeleting ? 55 : 95;
-
-  if (!isDeleting && charIndex === current.length) {
-    delay      = 2000; // pause at end
-    isDeleting = true;
-  } else if (isDeleting && charIndex === 0) {
-    isDeleting  = false;
-    phraseIndex = (phraseIndex + 1) % phrases.length;
-    delay       = 400;
-  }
-
-  typingTimer = setTimeout(typeText, delay);
+  setTimeout(typeText, delay);
 }
+window.addEventListener('load', () => setTimeout(typeText, 1000));
 
-// Start after page load
-window.addEventListener('load', () => setTimeout(typeText, 1200));
 
 /* ─────────────────────────────────────────
-   4. SCROLL REVEAL ANIMATIONS
+   5. SCROLL REVEAL
 ───────────────────────────────────────── */
-const revealObserver = new IntersectionObserver((entries) => {
+const revealObs = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       const el    = entry.target;
       const delay = parseInt(el.dataset.delay || 0);
       setTimeout(() => el.classList.add('revealed'), delay);
-      revealObserver.unobserve(el);
+      revealObs.unobserve(el);
     }
   });
-}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
+document.querySelectorAll('[data-reveal]').forEach(el => revealObs.observe(el));
+
 
 /* ─────────────────────────────────────────
-   5. SKILL BARS ANIMATION
+   6. SKILL BARS
 ───────────────────────────────────────── */
-let skillsAnimated = false;
+let skillsDone = false;
 
 function animateSkillBars() {
-  if (skillsAnimated) return;
-  const skillsSection = document.getElementById('skills');
-  if (!skillsSection) return;
-
-  const rect = skillsSection.getBoundingClientRect();
-  if (rect.top < window.innerHeight * 0.85) {
-    skillsAnimated = true;
+  if (skillsDone) return;
+  const sec = document.getElementById('skills');
+  if (!sec) return;
+  if (sec.getBoundingClientRect().top < window.innerHeight * 0.88) {
+    skillsDone = true;
     document.querySelectorAll('.skill-bar').forEach(bar => {
-      const fill  = bar.querySelector('.skill-fill');
-      const width = bar.dataset.width || 0;
-      if (fill) {
-        setTimeout(() => {
-          fill.style.width = width + '%';
-        }, 200);
-      }
+      const fill = bar.querySelector('.skill-fill');
+      if (fill) setTimeout(() => { fill.style.width = (bar.dataset.width || 0) + '%'; }, 200);
     });
   }
 }
 
+
 /* ─────────────────────────────────────────
-   6. COUNTER ANIMATION
+   7. COUNTER ANIMATION
 ───────────────────────────────────────── */
-let countersStarted = false;
+let countersDone = false;
 
 function animateCounters() {
-  if (countersStarted) return;
-  const statsRow = document.querySelector('.stats-row');
-  if (!statsRow) return;
-
-  const rect = statsRow.getBoundingClientRect();
-  if (rect.top < window.innerHeight * 0.9) {
-    countersStarted = true;
+  if (countersDone) return;
+  const row = document.querySelector('.stats-row');
+  if (!row) return;
+  if (row.getBoundingClientRect().top < window.innerHeight * 0.9) {
+    countersDone = true;
     document.querySelectorAll('.stat-number[data-count]').forEach(el => {
-      const target   = parseInt(el.dataset.count);
-      const duration = 1800;
-      const step     = 16;
-      const increment = target / (duration / step);
-      let current = 0;
-
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-          current = target;
-          clearInterval(timer);
-        }
-        el.textContent = Math.floor(current);
+      const target = parseInt(el.dataset.count);
+      const dur    = 1800;
+      const step   = 16;
+      const inc    = target / (dur / step);
+      let cur      = 0;
+      const timer  = setInterval(() => {
+        cur += inc;
+        if (cur >= target) { cur = target; clearInterval(timer); }
+        el.textContent = Math.floor(cur);
       }, step);
     });
   }
 }
 
+
 /* ─────────────────────────────────────────
-   7. PROJECT FILTER
+   8. PROJECT FILTER
 ───────────────────────────────────────── */
-const filterBtns  = document.querySelectorAll('.filter-btn');
-const projectCards = document.querySelectorAll('.project-card');
-
-filterBtns.forEach(btn => {
+document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    filterBtns.forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-
     const filter = btn.dataset.filter;
-
-    projectCards.forEach(card => {
-      const category = card.dataset.category;
-      const show = filter === 'all' || category === filter;
-
-      if (show) {
-        card.style.display = '';
-        // Tiny re-trigger for animation
-        card.style.animation = 'none';
-        card.offsetHeight; // reflow
-        card.style.animation = '';
-      } else {
-        card.style.display = 'none';
-      }
+    document.querySelectorAll('.project-card').forEach(card => {
+      const match = filter === 'all' || card.dataset.category === filter;
+      card.classList.toggle('hidden', !match);
     });
   });
 });
 
+
 /* ─────────────────────────────────────────
-   8. TESTIMONIALS SLIDER
+   9. TESTIMONIALS SLIDER
 ───────────────────────────────────────── */
-const slider     = document.getElementById('testimonialsSlider');
-const cards      = slider ? Array.from(slider.querySelectorAll('.testi-card')) : [];
+const sliderEl   = document.getElementById('testimonialsSlider');
+const cards      = sliderEl ? Array.from(sliderEl.querySelectorAll('.testi-card')) : [];
 const prevBtn    = document.getElementById('testiPrev');
 const nextBtn    = document.getElementById('testiNext');
 const dotsWrap   = document.getElementById('testiDots');
 
-let currentSlide = 0;
-let slidesPerView = getSlidesPerView();
-let autoSlide;
+let curSlide = 0;
+let perView  = getPerView();
+let autoInt;
 
-function getSlidesPerView() {
-  if (window.innerWidth <= 768) return 1;
-  if (window.innerWidth <= 1024) return 2;
-  return 3;
+function getPerView() {
+  if (window.innerWidth >= 1025) return 3;
+  if (window.innerWidth >= 769)  return 2;
+  return 1;
 }
+
+function getGap() { return window.innerWidth >= 769 ? 18 : 14; }
 
 function buildDots() {
   if (!dotsWrap) return;
   dotsWrap.innerHTML = '';
-  const totalDots = Math.ceil(cards.length / slidesPerView);
-  for (let i = 0; i < totalDots; i++) {
+  const total = Math.ceil(cards.length / perView);
+  for (let i = 0; i < total; i++) {
     const dot = document.createElement('button');
     dot.className = 'testi-dot' + (i === 0 ? ' active' : '');
-    dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
-    dot.addEventListener('click', () => goToSlide(i));
+    dot.setAttribute('aria-label', `Slide ${i + 1}`);
+    dot.addEventListener('click', () => { goTo(i * perView); startAuto(); });
     dotsWrap.appendChild(dot);
   }
 }
 
 function updateDots() {
   if (!dotsWrap) return;
-  const dots  = dotsWrap.querySelectorAll('.testi-dot');
-  const active = Math.floor(currentSlide / slidesPerView);
+  const dots   = dotsWrap.querySelectorAll('.testi-dot');
+  const active = Math.floor(curSlide / perView);
   dots.forEach((d, i) => d.classList.toggle('active', i === active));
 }
 
-function goToSlide(index) {
-  const maxSlide = cards.length - slidesPerView;
-  currentSlide   = Math.max(0, Math.min(index * slidesPerView, maxSlide));
-  applySlide();
-  updateDots();
-}
-
 function applySlide() {
-  if (!slider) return;
-  // Calculate card width including gap
-  const gap        = 24;
-  const cardWidth  = slider.offsetWidth / slidesPerView - (gap * (slidesPerView - 1) / slidesPerView);
-  const offset     = currentSlide * (cardWidth + gap);
-  slider.style.transform  = `translateX(-${offset}px)`;
-  slider.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
-}
-
-function nextSlide() {
-  const maxSlide = cards.length - slidesPerView;
-  currentSlide   = currentSlide >= maxSlide ? 0 : currentSlide + 1;
-  applySlide();
+  if (!sliderEl || cards.length === 0) return;
+  const gap       = getGap();
+  const vw        = sliderEl.parentElement.offsetWidth;
+  const cardW     = (vw - gap * (perView - 1)) / perView;
+  const offset    = curSlide * (cardW + gap);
+  sliderEl.style.transform  = `translateX(-${offset}px)`;
   updateDots();
 }
 
-function prevSlide() {
-  const maxSlide = cards.length - slidesPerView;
-  currentSlide   = currentSlide <= 0 ? maxSlide : currentSlide - 1;
+function goTo(idx) {
+  const max = Math.max(0, cards.length - perView);
+  curSlide  = Math.max(0, Math.min(idx, max));
   applySlide();
-  updateDots();
 }
 
-function startAutoSlide() {
-  stopAutoSlide();
-  autoSlide = setInterval(nextSlide, 4500);
-}
+function next() { goTo(curSlide >= cards.length - perView ? 0 : curSlide + 1); }
+function prev() { goTo(curSlide <= 0 ? cards.length - perView : curSlide - 1); }
 
-function stopAutoSlide() {
-  clearInterval(autoSlide);
-}
+function startAuto() { stopAuto(); autoInt = setInterval(next, 4500); }
+function stopAuto()  { clearInterval(autoInt); }
 
-if (slider && cards.length > 0) {
-  slider.style.display        = 'flex';
-  slider.style.overflow       = 'hidden';
-  slider.style.width          = '100%';
-
+if (sliderEl && cards.length > 0) {
   buildDots();
+  applySlide();
 
-  if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); startAutoSlide(); });
-  if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); startAutoSlide(); });
+  if (prevBtn) prevBtn.addEventListener('click', () => { prev(); startAuto(); });
+  if (nextBtn) nextBtn.addEventListener('click', () => { next(); startAuto(); });
 
-  // Touch / swipe support
-  let touchStartX = 0;
-  slider.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-  slider.addEventListener('touchend', e => {
-    const diff = touchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) {
-      diff > 0 ? nextSlide() : prevSlide();
-      startAutoSlide();
-    }
+  // Touch swipe
+  let txStart = 0;
+  sliderEl.addEventListener('touchstart', e => { txStart = e.touches[0].clientX; }, { passive: true });
+  sliderEl.addEventListener('touchend',   e => {
+    const diff = txStart - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) { diff > 0 ? next() : prev(); startAuto(); }
   });
 
-  slider.addEventListener('mouseenter', stopAutoSlide);
-  slider.addEventListener('mouseleave', startAutoSlide);
+  sliderEl.addEventListener('mouseenter', stopAuto);
+  sliderEl.addEventListener('mouseleave', startAuto);
 
-  startAutoSlide();
+  startAuto();
 
   // Recalculate on resize
+  let resizeTimer;
   window.addEventListener('resize', () => {
-    slidesPerView = getSlidesPerView();
-    currentSlide  = 0;
-    buildDots();
-    applySlide();
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      const newPV = getPerView();
+      if (newPV !== perView) { perView = newPV; curSlide = 0; buildDots(); }
+      applySlide();
+    }, 200);
   });
 }
 
+
 /* ─────────────────────────────────────────
-   9. BACK TO TOP BUTTON
+   10. BACK TO TOP
 ───────────────────────────────────────── */
-const backToTop = document.getElementById('backToTop');
-
+const btt = document.getElementById('backToTop');
 function toggleBackToTop() {
-  if (backToTop) {
-    backToTop.classList.toggle('show', window.scrollY > 400);
-  }
+  if (btt) btt.classList.toggle('show', window.scrollY > 400);
 }
+if (btt) btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-if (backToTop) {
-  backToTop.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-}
 
 /* ─────────────────────────────────────────
-   10. CONTACT FORM HANDLER
+   11. CONTACT FORM  →  visioreach@gmail.com
+   Uses EmailJS — free tier: 200 emails/month
 ───────────────────────────────────────── */
 function handleFormSubmit() {
-  const name    = document.getElementById('name');
-  const email   = document.getElementById('email');
-  const subject = document.getElementById('subject');
-  const message = document.getElementById('message');
+  const name    = document.getElementById('fname');
+  const email   = document.getElementById('femail');
+  const subject = document.getElementById('fsubject');
+  const service = document.getElementById('fservice');
+  const message = document.getElementById('fmessage');
   const btn     = document.getElementById('sendBtn');
+  const btnText = document.getElementById('btnText');
   const success = document.getElementById('formSuccess');
+  const errDiv  = document.getElementById('formError');
+  const errMsg  = document.getElementById('errorMsg');
 
-  // Basic validation
-  const fields = [name, email, subject, message];
+  // Hide any previous feedback
+  success.classList.remove('show');
+  errDiv.classList.remove('show');
+
+  // Validate required fields
+  const required = [name, email, subject, message];
   let valid = true;
-
-  fields.forEach(field => {
-    if (!field) return;
-    field.style.borderColor = '';
-    if (!field.value.trim()) {
-      field.style.borderColor = '#EF4444';
-      field.style.boxShadow   = '0 0 0 3px rgba(239,68,68,0.15)';
-      valid = false;
-    } else {
-      field.style.borderColor = 'var(--glass-border)';
-      field.style.boxShadow   = '';
-    }
+  required.forEach(f => {
+    if (!f) return;
+    const empty = !f.value.trim();
+    f.style.borderColor  = empty ? '#F87171' : '';
+    f.style.boxShadow    = empty ? '0 0 0 3px rgba(248,113,113,.15)' : '';
+    if (empty) valid = false;
   });
 
-  if (email && email.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
-    email.style.borderColor = '#EF4444';
-    email.style.boxShadow   = '0 0 0 3px rgba(239,68,68,0.15)';
+  // Email format check
+  if (email && email.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+    email.style.borderColor = '#F87171';
+    email.style.boxShadow   = '0 0 0 3px rgba(248,113,113,.15)';
     valid = false;
   }
 
   if (!valid) return;
 
-  // Simulate sending
-  if (btn) {
-    btn.disabled          = true;
-    btn.innerHTML         = '<i class="bx bx-loader-alt bx-spin"></i> Sending...';
-    btn.style.opacity     = '0.7';
+  // Reset field borders
+  required.forEach(f => { if (f) { f.style.borderColor = ''; f.style.boxShadow = ''; } });
+
+  // Loading state
+  if (btn)  { btn.disabled = true; btn.style.opacity = '.7'; }
+  if (btnText) btnText.textContent = 'Sending…';
+
+  // Check if EmailJS is configured
+  const configured = EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY'
+    && EMAILJS_SERVICE_ID  !== 'YOUR_SERVICE_ID'
+    && EMAILJS_TEMPLATE_ID !== 'YOUR_TEMPLATE_ID';
+
+  const params = {
+    from_name:  name.value.trim(),
+    from_email: email.value.trim(),
+    subject:    subject.value.trim(),
+    service:    service ? service.value || 'Not specified' : 'Not specified',
+    message:    message.value.trim(),
+    to_email:   'visioreach@gmail.com',
+  };
+
+  if (configured && typeof emailjs !== 'undefined') {
+    // Real send via EmailJS
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
+      .then(() => {
+        showSuccess();
+        clearForm([name, email, subject, message]);
+        if (service) service.value = '';
+      })
+      .catch(err => {
+        console.error('EmailJS error:', err);
+        showError('Send failed. Please try WhatsApp or email directly.');
+      })
+      .finally(() => resetBtn());
+  } else {
+    // Demo mode: simulate send (remove once EmailJS is configured)
+    setTimeout(() => {
+      showSuccess();
+      clearForm([name, email, subject, message]);
+      if (service) service.value = '';
+      resetBtn();
+    }, 1600);
   }
 
-  setTimeout(() => {
-    if (btn) {
-      btn.disabled      = false;
-      btn.innerHTML     = '<i class="bx bx-send"></i> Send Message';
-      btn.style.opacity = '1';
-    }
-    if (success) {
-      success.classList.add('show');
-      setTimeout(() => success.classList.remove('show'), 5000);
-    }
-    // Clear fields
+  function showSuccess() {
+    success.classList.add('show');
+    setTimeout(() => success.classList.remove('show'), 6000);
+  }
+  function showError(msg) {
+    if (errMsg) errMsg.textContent = msg;
+    errDiv.classList.add('show');
+    setTimeout(() => errDiv.classList.remove('show'), 6000);
+  }
+  function resetBtn() {
+    if (btn)  { btn.disabled = false; btn.style.opacity = '1'; }
+    if (btnText) btnText.textContent = 'Send Message';
+  }
+  function clearForm(fields) {
     fields.forEach(f => { if (f) f.value = ''; });
-    const serviceField = document.getElementById('service');
-    if (serviceField) serviceField.value = '';
-  }, 1800);
+  }
 }
 
-// Make function globally accessible (called from HTML onclick)
+// Expose globally for onclick
 window.handleFormSubmit = handleFormSubmit;
 
-/* ─────────────────────────────────────────
-   11. SMOOTH SCROLL for anchor links
-───────────────────────────────────────── */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      const offset = target.getBoundingClientRect().top + window.scrollY - parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height'));
-      window.scrollTo({ top: offset, behavior: 'smooth' });
-    }
+// Clear red border on input
+['fname','femail','fsubject','fmessage'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', () => {
+    el.style.borderColor = '';
+    el.style.boxShadow   = '';
   });
 });
 
-/* ─────────────────────────────────────────
-   12. PARALLAX effect on hero orbs
-───────────────────────────────────────── */
-const orbs = document.querySelectorAll('.orb');
-
-window.addEventListener('mousemove', (e) => {
-  if (window.innerWidth < 768) return;
-  const x = (e.clientX / window.innerWidth  - 0.5) * 2;
-  const y = (e.clientY / window.innerHeight - 0.5) * 2;
-
-  orbs.forEach((orb, i) => {
-    const intensity = (i + 1) * 10;
-    orb.style.transform = `translate(${x * intensity}px, ${y * intensity}px)`;
-  });
-}, { passive: true });
 
 /* ─────────────────────────────────────────
-   13. NAVBAR HIDE / SHOW on scroll direction
-───────────────────────────────────────── */
-let lastScrollY  = 0;
-let ticking      = false;
-
-window.addEventListener('scroll', () => {
-  if (!ticking) {
-    requestAnimationFrame(() => {
-      const currentY = window.scrollY;
-      // Only hide if scrolled down more than nav height
-      if (currentY > parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height'))) {
-        if (currentY > lastScrollY + 5) {
-          navbar.style.transform = 'translateY(-100%)';
-        } else if (currentY < lastScrollY - 5) {
-          navbar.style.transform = 'translateY(0)';
-        }
-      } else {
-        navbar.style.transform = 'translateY(0)';
-      }
-      lastScrollY = currentY;
-      ticking     = false;
-    });
-    ticking = true;
-  }
-}, { passive: true });
-
-/* Ensure navbar transitions smoothly */
-navbar.style.transition = 'transform 0.35s cubic-bezier(0.4,0,0.2,1), background 0.3s ease, box-shadow 0.3s ease';
-
-/* ─────────────────────────────────────────
-   14. CURSOR GLOW EFFECT (desktop only)
+   12. MOUSE PARALLAX on hero orbs (desktop)
 ───────────────────────────────────────── */
 if (window.innerWidth > 1024) {
-  const cursorGlow = document.createElement('div');
-  cursorGlow.style.cssText = `
-    position: fixed;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,107,43,0.06) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-    transform: translate(-50%, -50%);
-    transition: opacity 0.3s ease;
-    will-change: left, top;
-  `;
-  document.body.appendChild(cursorGlow);
+  const orbs = document.querySelectorAll('.orb');
+  let mx = 0, my = 0, ox = 0, oy = 0;
 
-  let glowX = 0, glowY = 0;
-  let targetX = 0, targetY = 0;
-
-  document.addEventListener('mousemove', (e) => {
-    targetX = e.clientX;
-    targetY = e.clientY;
+  document.addEventListener('mousemove', e => {
+    mx = (e.clientX / window.innerWidth  - .5) * 2;
+    my = (e.clientY / window.innerHeight - .5) * 2;
   }, { passive: true });
 
-  function animateGlow() {
-    glowX += (targetX - glowX) * 0.08;
-    glowY += (targetY - glowY) * 0.08;
-    cursorGlow.style.left = glowX + 'px';
-    cursorGlow.style.top  = glowY + 'px';
-    requestAnimationFrame(animateGlow);
-  }
-  animateGlow();
-
-  document.addEventListener('mouseleave', () => cursorGlow.style.opacity = '0');
-  document.addEventListener('mouseenter', () => cursorGlow.style.opacity = '1');
+  (function animOrbs() {
+    ox += (mx - ox) * .06;
+    oy += (my - oy) * .06;
+    orbs.forEach((orb, i) => {
+      const s = (i + 1) * 9;
+      orb.style.transform = `translate(${ox * s}px, ${oy * s}px)`;
+    });
+    requestAnimationFrame(animOrbs);
+  })();
 }
 
+
 /* ─────────────────────────────────────────
-   15. INITIAL PAGE LOAD
+   13. CURSOR GLOW  (desktop only)
+───────────────────────────────────────── */
+if (window.innerWidth > 1024) {
+  const glow = document.createElement('div');
+  Object.assign(glow.style, {
+    position:'fixed', width:'280px', height:'280px', borderRadius:'50%',
+    background:'radial-gradient(circle, rgba(255,107,43,.055) 0%, transparent 70%)',
+    pointerEvents:'none', zIndex:'0',
+    transform:'translate(-50%, -50%)',
+    transition:'opacity .3s', willChange:'left,top',
+  });
+  document.body.appendChild(glow);
+
+  let gx = 0, gy = 0, tx = 0, ty = 0;
+  document.addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; }, { passive: true });
+  document.addEventListener('mouseleave', () => { glow.style.opacity = '0'; });
+  document.addEventListener('mouseenter', () => { glow.style.opacity = '1'; });
+
+  (function animGlow() {
+    gx += (tx - gx) * .08;
+    gy += (ty - gy) * .08;
+    glow.style.left = gx + 'px';
+    glow.style.top  = gy + 'px';
+    requestAnimationFrame(animGlow);
+  })();
+}
+
+
+/* ─────────────────────────────────────────
+   14. INIT on DOMContentLoaded
 ───────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
-  // Run on load
   updateActiveLink();
   toggleBackToTop();
   animateSkillBars();
   animateCounters();
-
-  // Add transition to navbar after brief delay (prevents flash)
-  setTimeout(() => {
-    navbar.classList.add('loaded');
-  }, 100);
 });
