@@ -568,10 +568,6 @@ h1,h2,h3,h4{font-family:'Syne',sans-serif;line-height:1.15;font-weight:700}
 #formSuccess{color:#22C55E;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2)}
 .form-error{color:#F87171;background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.2)}
 
-.emailjs-note{font-size:.72rem;color:var(--text-3);margin-top:12px;display:flex;align-items:flex-start;gap:5px}
-.emailjs-note a{color:var(--orange)}
-.emailjs-note code{color:var(--cyan);font-size:.7rem}
-
 
 /* ═══════════════════════════════
    FOOTER
