@@ -8,22 +8,17 @@
 /* ─────────────────────────────────────────
    EmailJS Configuration
    ─────────────────────────────────────────
-   SETUP:
-   1. Replace YOUR_PUBLIC_KEY  → Account → API Keys
-   2. Replace YOUR_SERVICE_ID  → Email Services tab
-   3. Replace YOUR_CONTACT_TEMPLATE_ID → your "Contact Us" template
-   4. Replace YOUR_AUTOREPLY_TEMPLATE_ID → your "Auto Reply" template
-
-   CONTACT US template variables needed:
-     {{from_name}} {{from_email}} {{subject}} {{service}} {{message}}
-
-   AUTO REPLY template variables needed:
-     {{from_name}} {{from_email}} {{subject}}
+   SETUP STEPS (free – 200 emails/month):
+   1. Go to https://emailjs.com → Create free account
+   2. Add a Gmail service → connect visioreach@gmail.com
+   3. Create an Email Template. Use these variables:
+        {{from_name}}  {{from_email}}  {{subject}}
+        {{service}}    {{message}}     {{to_email}}
+   4. Replace the three strings below with your real IDs
    ───────────────────────────────────────── */
-const EMAILJS_PUBLIC_KEY         = 'AyLw7OkdSV9Y-LVmI';          // Account → API Keys
-const EMAILJS_SERVICE_ID         = 'service_13qig5j';          // Email Services tab
-const EMAILJS_CONTACT_TEMPLATE   = 'template_d6wbo9g'; // Contact Us template
-const EMAILJS_AUTOREPLY_TEMPLATE = 'template_h4xuzp4'; // Auto Reply template
+const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // Account → API Keys
+const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // Email Services tab
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // Email Templates tab
 
 // Initialize EmailJS
 (function(){
@@ -400,13 +395,11 @@ function handleFormSubmit() {
   if (btn)  { btn.disabled = true; btn.style.opacity = '.7'; }
   if (btnText) btnText.textContent = 'Sending…';
 
-  // Check if EmailJS is fully configured
-  const configured = EMAILJS_PUBLIC_KEY          !== 'YOUR_PUBLIC_KEY'
-    && EMAILJS_SERVICE_ID                         !== 'YOUR_SERVICE_ID'
-    && EMAILJS_CONTACT_TEMPLATE                   !== 'YOUR_CONTACT_TEMPLATE_ID'
-    && EMAILJS_AUTOREPLY_TEMPLATE                 !== 'YOUR_AUTOREPLY_TEMPLATE_ID';
+  // Check if EmailJS is configured
+  const configured = EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY'
+    && EMAILJS_SERVICE_ID  !== 'YOUR_SERVICE_ID'
+    && EMAILJS_TEMPLATE_ID !== 'YOUR_TEMPLATE_ID';
 
-  // Params shared by both templates
   const params = {
     from_name:  name.value.trim(),
     from_email: email.value.trim(),
@@ -417,15 +410,8 @@ function handleFormSubmit() {
   };
 
   if (configured && typeof emailjs !== 'undefined') {
-
-    // Send 1: Contact Us template → notifies YOU at visioreach@gmail.com
-    const sendContact = emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_CONTACT_TEMPLATE, params);
-
-    // Send 2: Auto-Reply template → goes to the CLIENT automatically
-    const sendAutoReply = emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_AUTOREPLY_TEMPLATE, params);
-
-    // Wait for both to finish
-    Promise.all([sendContact, sendAutoReply])
+    // Real send via EmailJS
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
       .then(() => {
         showSuccess();
         clearForm([name, email, subject, message]);
@@ -436,9 +422,8 @@ function handleFormSubmit() {
         showError('Send failed. Please try WhatsApp or email directly.');
       })
       .finally(() => resetBtn());
-
   } else {
-    // Demo mode — works until you paste in your real IDs
+    // Demo mode: simulate send (remove once EmailJS is configured)
     setTimeout(() => {
       showSuccess();
       clearForm([name, email, subject, message]);
