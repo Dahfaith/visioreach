@@ -37,27 +37,8 @@ portfolio/
 - SEO & Open Graph meta tags
 - SVG favicon
 
-## 🌐 Deploying to Vercel
-1. Push this folder to a GitHub repository
-2. Go to [vercel.com](https://vercel.com) → New Project → Import repo
-3. Select the repo → Deploy (no build settings needed)
 
 ## 🌐 Deploying to GitHub Pages
 1. Push to GitHub
 2. Go to repo → Settings → Pages
 3. Set source: `main` branch / `root` folder → Save
-
-## 🎨 Customization
-- Colors: edit CSS variables in `:root {}` at the top of `style.css`
-- Content: update text, links, and project info in `index.html`
-- Images: replace `.project-img-placeholder` divs with real `<img>` tags
-- WhatsApp: replace `2348000000000` with your real number
-- Email: replace `hello@visioreachconcepts.com` with your real email
-
-## 📝 To Add Real Profile Image
-Replace the `.about-img-placeholder` div in `index.html`:
-```html
-<img src="assets/images/profile.jpg" alt="VisioReach Concepts – Profile" />
-```
-
-## 📦 No build tools needed — pure HTML/CSS/JS, open index.html directly.
