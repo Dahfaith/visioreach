@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dada Gideon Oluwatobi | Professional Resume</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+  <style>
+    /* ── System Variables & Brand Token Mapping ── */
+    :root {
+      --orange: #FF6B2B;
+      --purple: #8B5CF6;
+      --cyan: #06B6D4;
+      --bg-dark: #080B14;
+      --bg-card: rgba(255, 255, 255, 0.03);
+      --border: rgba(255, 255, 255, 0.08);
+      --text-primary: #F1F5F9;
+      --text-secondary: #94A3B8;
+      --text-muted: #64748B;
+      --grad: linear-gradient(135deg, var(--orange), var(--purple));
+      --r-md: 12px;
+      --r-lg: 20px;
+    }
+
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      list-style: none; 
+      text-decoration: none; 
+    }
+
+    body { 
+      background: var(--bg-dark); 
+      color: var(--text-primary); 
+      font-family: 'DM Sans', sans-serif; 
+      line-height: 1.6;
+      padding: 40px 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Clean Multi-Column Layout Frame ── */
+    .resume-wrapper {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 35px;
+    }
+
+    @media (min-width: 768px) {
+      .resume-wrapper {
+        grid-template-columns: 290px 1fr;
+        gap: 45px;
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       LEFT NAVIGATION BAR (Sidebar)
+    ═══════════════════════════════════════════ */
+    .avatar-container {
+      position: relative;
+      width: 130px;
+      height: 130px;
+      margin: 0 auto 24px;
+    }
+
+    .avatar-glow-ring {
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, var(--orange), var(--purple), var(--cyan), var(--orange));
+      animation: rotateRing 9s linear infinite;
+      z-index: 1;
+    }
+
+    .avatar-frame {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid var(--bg-dark);
+      background: #12141c;
+      z-index: 2;
+    }
+
+    .avatar-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @keyframes rotateRing {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .profile-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 6px;
+      letter-spacing: -0.4px;
+    }
+
+    .profile-role {
+      color: var(--orange);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 24px;
+    }
+
+    .sidebar-section {
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      margin-top: 20px;
+    }
+
+    .sidebar-heading {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    .directory-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+    }
+
+    .directory-list i {
+      font-size: 1.2rem;
+      color: var(--purple);
+    }
+
+    .directory-list a {
+      color: inherit;
+      transition: color 0.2s ease;
+    }
+
+    .directory-list a:hover {
+      color: var(--orange);
+    }
+
+    /* ═══════════════════════════════════════════
+       RIGHT CONTENT PANEL (Timelines & Blocks)
+    ═══════════════════════════════════════════ */
+    .content-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    .panel-block h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 22px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .panel-block h3::before {
+      content: '';
+      width: 4px;
+      height: 16px;
+      background: var(--grad);
+      border-radius: 2px;
+    }
+
+    /* Professional Chronicle Timeline Structure */
+    .timeline-element {
+      position: relative;
+      padding-left: 24px;
+      border-left: 2px solid var(--border);
+      padding-bottom: 24px;
+    }
+
+    .timeline-element:last-child {
+      border-left: 2px solid transparent;
+      padding-bottom: 0;
+    }
+
+    .timeline-element::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--orange);
+      border: 2px solid var(--bg-dark);
+    }
+
+    .element-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 6px;
+      gap: 12px;
+    }
+
+    .element-title-group h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .element-title-group span {
+      font-size: 0.85rem;
+      color: var(--orange);
+      font-weight: 500;
+    }
+
+    .span-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      background: var(--bg-card);
+      padding: 4px 12px;
+      border-radius: var(--r-pill);
+      border: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    .element-bullets {
+      margin-top: 10px;
+    }
+
+    .element-bullets li {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .element-bullets li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--purple);
+    }
+
+    /* Core Skills Premium Responsive Grid */
+    .skills-responsive-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    @media (min-width: 480px) {
+      .skills-responsive-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .skill-card-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      border-radius: var(--r-md);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .skill-card-item i {
+      font-size: 1.1rem;
+      color: var(--orange);
+    }
+
+    /* ── Bottom Trigger Systems ── */
+    .export-container {
+      max-width: 960px;
+      margin: 24px auto 0;
+      padding: 0 20px;
+    }
+
+    .btn-trigger {
+      width: 100%;
+      padding: 16px;
+      background: var(--grad);
+      color: #ffffff;
+      border: none;
+      border-radius: 50px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 4px 18px rgba(255, 107, 43, 0.25);
+    }
+
+    /* ── High-Fidelity Print Engine Translation (Fixed for A4 / Page Breaks) ── */
+    @media print {
+      @page {
+        size: A4;
+        margin: 15mm;
+      }
+      body { 
+        background: #ffffff !important; 
+        color: #0f172a !important; 
+        padding: 0; 
+      }
+      .resume-wrapper { 
+        max-width: 100%; 
+        padding: 0; 
+        grid-template-columns: 210px 1fr !important; 
+        gap: 35px; 
+      }
+      .avatar-container { display: none !important; }
+      .panel-block h3::before { background: #FF6B2B !important; }
+      .panel-block h3, .element-title-group h4 { 
+        color: #0f172a !important; 
+        border-bottom: 1px solid #cbd5e1 !important; 
+      }
+      .element-title-group span, .span-badge, .directory-list i, .skill-card-item i { 
+        color: #FF6B2B !important; 
+      }
+      .body-desc, .element-bullets li, .directory-list li, .skill-card-item { 
+        color: #334155 !important; 
+      }
+      .span-badge, .skill-card-item { 
+        background: #f1f5f9 !important; 
+        border: 1px solid #cbd5e1 !important; 
+      }
+      .export-container { display: none !important; }
+      .panel-block {
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="resume-wrapper">
+    
+    <aside class="sidebar">
+      <div class="avatar-container">
+        <div class="avatar-glow-ring"></div>
+        <div class="avatar-frame">
+          <img src="https://loadedmoremp3.com.ng/wp-content/uploads/2026/05/myself.jpg" alt="Dada Gideon Oluwatobi" />
+        </div>
+      </div>
+
+      <h1 class="profile-name">Dada Gideon O.</h1>
+      <div class="profile-role">Web Administrator</div>
+
+      <p class="body-desc" style="font-size: 0.88rem; color: var(--text-secondary);">
+        Proactive technician specialized in WordPress performance frameworks and front-end interface engineering layouts.
+      </p>
+
+      <div class="sidebar-section">
+        <div class="sidebar-heading">Contact Info</div>
+        <ul class="directory-list">
+          <li><i class='bx bx-envelope'></i> <a href="mailto:lamdahfaith@gmail.com">lamdahfaith@gmail.com</a></li>
+          <li><i class='bx bxl-whatsapp'></i> <a href="https://wa.me/2347069659752" target="_blank">07069659752</a></li>
+          <li><i class='bx bx-map'></i> Lagos State, Nigeria</li>
+          <li><i class='bx bx-globe'></i> <a href="https://visioreach.co" target="_blank">visioreach.co</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-heading">Social Grid</div>
+        <ul class="directory-list">
+          <li><i class='bx bxl-linkedin-square'></i> <a href="https://linkedin.com/in/loadedmore" target="_blank">/in/loadedmore</a></li>
+          <li><i class='bx bxl-github'></i> <a href="https://github.com/Dahfaith" target="_blank">/Dahfaith</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="content-panel">
+      
+      <section class="panel-block">
+        <h3>Work Experience</h3>
+        
+        <div class="timeline-element">
+          <div class="element-header">
+            <div class="element-title-group">
+              <h4>Freelance Web Designer &amp; Admin</h4>
+              <span>WordPress Management</span>
+            </div>
+            <span class="span-badge">2023 - Present</span>
+          </div>
+          <ul class="element-bullets">
+            <li>Manage and update website content using WordPress and Elementor frameworks.</li>
+            <li>Perform active core backend structural updates using localized PHP modifications.</li>
+            <li>Ensure cross-browser layout responsiveness, overall execution functionality, and database speed metrics.</li>
+            <li>Install, audit, and configure custom theme extensions and global security updates.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-element">
+          <div class="element-header">
+            <div class="element-title-group">
+              <h4>Digital Marketer &amp; Content Manager</h4>
+              <span>Self-Employed Brand Lead</span>
+            </div>
+            <span class="span-badge">2020 - Present</span>
+          </div>
+          <ul class="element-bullets">
+            <li>Construct and manage high-engagement graphic assets across web deployment platforms.</li>
+            <li>Design operational interface layouts, promotional banners, and visual frameworks via Canva tools.</li>
+            <li>Deploy advanced OnPage and OffPage search engine optimization workflows to multiply traffic indexing.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-element">
+          <div class="element-header">
+            <div class="element-title-group">
+              <h4>Blogger &amp; Content Creator</h4>
+              <span>CMS Platforms Management</span>
+            </div>
+            <span class="span-badge">2018 - Present</span>
+          </div>
+          <ul class="element-bullets">
+            <li>Publish, format, and manage diverse web content arrays utilizing distinct niche CMS platforms.</li>
+            <li>Optimize structural presentation parameters and layouts for search engines and maximum user experience metrics.</li>
+            <li><strong>Key Project:</strong> Founded and currently manage **Loadedmore**, a dedicated digital entertainment platform launched in 2018.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="panel-block">
+        <h3>Core Skills Matrix</h3>
+        <div class="skills-responsive-grid">
+          <div class="skill-card-item"><i class='bx bxl-wordpress'></i> WordPress</div>
+          <div class="skill-card-item"><i class='bx bxl-html5'></i> HTML5 / CSS3</div>
+          <div class="skill-card-item"><i class='bx bxl-javascript'></i> JavaScript</div>
+          <div class="skill-card-item"><i class='bx bxl-php'></i> PHP Backend</div>
+          <div class="skill-card-item"><i class='bx bx-layer'></i> Elementor</div>
+          <div class="skill-card-item"><i class='bx bx-search-alt'></i> Core SEO</div>
+          <div class="skill-card-item"><i class='bx bx-palette'></i> Canva Pro</div>
+          <div class="skill-card-item"><i class='bx bx-shield-quarter'></i> Optimization</div>
+        </div>
+      </section>
+
+      <section class="panel-block">
+        <h3>Education History</h3>
+        
+        <div class="timeline-element">
+          <div class="element-header">
+            <div class="element-title-group">
+              <h4>Ladoke Akintola University of Technology (LAUTECH)</h4>
+              <span>B.Sc. Computer Science</span>
+            </div>
+            <span class="span-badge">2021 - 2025</span>
+          </div>
+        </div>
+
+        <div class="timeline-element">
+          <div class="element-header">
+            <div class="element-title-group">
+              <h4>Oyo State School of Science</h4>
+              <span>Senior Secondary Certificate (SSCE)</span>
+            </div>
+            <span class="span-badge">2014 - 2017</span>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <div class="export-container">
+    <button class="btn-trigger" onclick="window.print()"><i class='bx bx-printer'></i> Print or Export Clear PDF</button>
+  </div>
+
+</body>
+</html>
