@@ -319,7 +319,7 @@
       box-shadow: 0 4px 18px rgba(255, 107, 43, 0.25);
     }
 
-    /* ── High-Fidelity Print Engine Translation (Fixed for A4 / Page Breaks) ── */
+    /* ── High-Fidelity Print Engine Translation (Fixed for Image Display, A4, & Page Breaks) ── */
     @media print {
       @page {
         size: A4;
@@ -336,7 +336,21 @@
         grid-template-columns: 210px 1fr !important; 
         gap: 35px; 
       }
-      .avatar-container { display: none !important; }
+      
+      /* FIXED: Profile image container is explicitly allowed and styled for printing */
+      .avatar-container { 
+        display: block !important; 
+        width: 100px !important;
+        height: 100px !important;
+        margin-bottom: 15px !important;
+      }
+      .avatar-glow-ring { 
+        display: none !important; /* Disables raw web backgrounds on the outer ring for printing */
+      }
+      .avatar-frame {
+        border: 2px solid #cbd5e1 !important;
+      }
+
       .panel-block h3::before { background: #FF6B2B !important; }
       .panel-block h3, .element-title-group h4 { 
         color: #0f172a !important; 
@@ -353,6 +367,7 @@
         border: 1px solid #cbd5e1 !important; 
       }
       .export-container { display: none !important; }
+      
       .panel-block {
         page-break-inside: avoid;
         break-inside: avoid;
@@ -361,6 +376,12 @@
   </style>
 </head>
 <body>
+
+  <div class="hero-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="grid-lines"></div>
+  </div>
 
   <div class="resume-wrapper">
     
@@ -445,7 +466,7 @@
           <ul class="element-bullets">
             <li>Publish, format, and manage diverse web content arrays utilizing distinct niche CMS platforms.</li>
             <li>Optimize structural presentation parameters and layouts for search engines and maximum user experience metrics.</li>
-            <li><strong>Key Project:</strong> Founded and currently manage **Loadedmore**, a dedicated digital entertainment platform launched in 2018.</li>
+            <li><strong>Key Project:</strong> Founded and currently manage Loadedmore, a dedicated digital entertainment platform launched in 2018.</li>
           </ul>
         </div>
       </section>
